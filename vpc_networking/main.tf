@@ -116,3 +116,12 @@ resource "aws_route_table_association" "private_subnet_3_association" {
   route_table_id = aws_route_table.private_route_table.id
   subnet_id = aws_subnet.module_private_subnet_3.id
 }
+
+resource "aws_eip" "elastic_ip_for_nat_gw" {
+  vpc = true
+  associate_with_private_ip = var.eip_association_address
+
+  tags = {
+    Name="Production-EIP"
+  }
+}

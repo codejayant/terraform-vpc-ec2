@@ -167,8 +167,8 @@ data "aws_ami" "ubuntu_latest" {
 
 resource "aws_instance" "my-first-ec2-instance" {
   ami = data.aws_ami.ubuntu_latest.id
-  instance_type = "t2.micro"
-  key_name = "my-first-ec2-instance"
+  instance_type = var.ec2_instance_type
+  key_name = var.ec2_keypair
   security_groups = [aws_security_group.ec2-security-group.id]
   subnet_id = aws_subnet.module_public_subnet_1.id
 }
@@ -190,4 +190,16 @@ resource "aws_security_group" "ec2-security-group" {
     to_port = 0
     cidr_blocks = ["0.0.0.0/0"]
   }
+}
+
+output "vpc_cidr_block" {
+  value = aws_vpc.module_vpc.cidr_block
+}
+
+output "public_subnet_1_cidr" {
+  value = aws_subnet.module_public_subnet_1.cidr_block
+}
+
+output "private_subnet_1_cidr" {
+  value = aws_subnet.module_private_subnet_1.cidr_block
 }

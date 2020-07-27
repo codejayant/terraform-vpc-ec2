@@ -15,5 +15,8 @@ Run following command in source directory
 1. To validate the terraform configuration
 `terraform plan --var-file=production.tfvars`
 
-2. To execute the infrastructure
+2. To create the infrastructure
 `terraform apply --var-file=production.tfvars`
+
+3. To delete the infrastructure
+`terraform destroy --var-file=production.tfvars`
